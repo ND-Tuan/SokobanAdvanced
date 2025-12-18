@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SkinData
+  m_EditorClassIdentifier: 
+  m_GroupName: SkinData
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8a2ee532d0f39a845bd6173bd01f0796
+  m_SerializeEntries:
+  - m_GUID: 1f01ed32270dfae48b16788d7df208f6
+    m_Address: Assets/DataPack/SkinData/Orange.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkinData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90113dd5641449d4987767700443df6b
+    m_Address: Assets/DataPack/SkinData/YinYang.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkinData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d15c4532ef294d48b30cc54e6159fc8
+    m_Address: Assets/DataPack/SkinData/Chicken.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkinData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b919a00fd2c937a48b09a9483de63422
+    m_Address: Assets/DataPack/SkinData/VietNam.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkinData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 06ca8710bf707794f915dea4a0d9f42f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 45d8a211f9d785b4dbbb7002f6cc6226, type: 2}
+    - {fileID: 11400000, guid: a860cab91d725f241a07dd419de59e5f, type: 2}

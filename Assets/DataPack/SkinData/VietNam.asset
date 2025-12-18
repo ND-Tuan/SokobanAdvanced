@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d3390916bb46f4e91ca4328f4c0f58, type: 3}
+  m_Name: VietNam
+  m_EditorClassIdentifier: 
+  skinID: 3
+  skinName: 'Flag of Vietnam '
+  skinImage: {fileID: 1292729824, guid: 104fff26cf1b9eb49b04bfc096c6b25b, type: 3}
+  price: 0
+  skinPrefab: {fileID: 778205693292771645, guid: 542b40e1b10ab1148ad3632917708dca, type: 3}
+  specialEffect: 1

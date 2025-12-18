@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI Group
+  m_EditorClassIdentifier: 
+  m_GroupName: UI Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7a1841a98b04c2b43a63693c19e840f7
+  m_SerializeEntries:
+  - m_GUID: 061e566b6d65d7548a38a9966273e174
+    m_Address: Assets/Prefabs/UI/Stage/Stage 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageUI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4b9f0e9708bc2049ad8511cea944e12
+    m_Address: Assets/Prefabs/UI/Stage/Stage 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageUI
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 06ca8710bf707794f915dea4a0d9f42f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b0f074dbaf770084e9a133889b0e01b1, type: 2}
+    - {fileID: 11400000, guid: 6861e1a37010f0d4b99cb97dfe33a5a6, type: 2}

@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GuideData
+  m_EditorClassIdentifier: 
+  m_GroupName: GuideData
+  m_GUID: 70c3e011fcf3f7542b7aadfcfe983159
+  m_SerializeEntries:
+  - m_GUID: 00ff2db481d40e34ea4de8fd2f2217bd
+    m_Address: Assets/DataPack/GuideData/Goal.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 532f009be095e584998e72a65191c0d9
+    m_Address: Assets/DataPack/GuideData/OilBarrel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55f55a229c8d88a428b139c2fe4eb8db
+    m_Address: Assets/DataPack/GuideData/FireBox.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cd49ed014f882c4f9aa9f7f774fe659
+    m_Address: Assets/DataPack/GuideData/ElectricBox.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7554a1c82f3e24542bed506e1376acfc
+    m_Address: Assets/DataPack/GuideData/PowerDelivery.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a0202e7d5727f7438757d92ebfd71ea
+    m_Address: Assets/DataPack/GuideData/Door.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a620fea737590884e806001a566ae762
+    m_Address: Assets/DataPack/GuideData/PressurePlate.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa80becda37bfe04fac8e731a315cbd6
+    m_Address: Assets/DataPack/GuideData/Teleporter.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c387f8779b1296148b63b4ba74c733ab
+    m_Address: Assets/DataPack/GuideData/DoorPressure.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3b052f912bfc15488703b3d66bfa2f5
+    m_Address: Assets/DataPack/GuideData/Conveyor.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a5bd064d849c749b98bc4e7feb173e
+    m_Address: Assets/DataPack/GuideData/MagnetBox.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GuideData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 06ca8710bf707794f915dea4a0d9f42f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 87ae457270969154cac9398f4d7f6ab4, type: 2}
+    - {fileID: 11400000, guid: 92f4265324a5ff64b88035c124c7fa2c, type: 2}

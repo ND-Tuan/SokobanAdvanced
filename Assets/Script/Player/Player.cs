@@ -1,52 +1,94 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerGridMover : MonoBehaviour
+public class Player : MonoBehaviour, IResetLevel, IMoveable
 {
+    [SerializeField] private GameObject Interface;
+    [SerializeField] private ParticleSystem particle;
+    private Animator animator;
+
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float moveDelay = 0.15f; // thời gian chờ giữa 2 bước khi giữ phím
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask boxLayer;
     [SerializeField] private float rayDistance = 0.6f;
 
-    private bool isMoving = false;
-    private Vector2 moveDir;
+
+    private Vector2 startTouchPosition, endTouchPosition;
+    public bool isMoving = false;
+    
+    private ParticleSystem[] Module;
+
+    private Vector2 originalPosition;
+
+
+    void Awake()
+    {
+        Interface.SetActive(false);
+        Interface = null;
+
+        GameObject currentSkin = PoolManager.Instance.Get(GameManager.Instance.PlayerDataManager.GetEquippedSkin().SkinPrefab);
+        currentSkin.transform.SetParent(this.transform);
+
+        Interface = currentSkin;
+        Interface.transform.localPosition = Vector3.zero;
+        Interface.transform.localScale = Vector3.one;
+
+        particle = Interface.GetComponentInChildren<ParticleSystem>();
+    }
 
     void Start()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();
+        animator = Interface.GetComponent<Animator>();
+        Module = particle.gameObject.GetComponentsInChildren<ParticleSystem>();
 
         // Snap vị trí ban đầu
         Vector3 p = transform.position;
         p.x = Mathf.RoundToInt(p.x) ;
         p.y = Mathf.RoundToInt(p.y);
         transform.position = p;
+        originalPosition = transform.position;
     }
 
     void Update()
     {
-        if (!isMoving)
+        if (!isMoving && Input.touchCount > 0)
         {
-            moveDir = Vector2.zero;
+            Touch touch = Input.GetTouch(0);
 
-            // Ưu tiên theo chiều ngang
-            float x = Input.GetAxisRaw("Horizontal");
-            float y = Input.GetAxisRaw("Vertical");
-            if (Mathf.Abs(x) > Mathf.Abs(y))
-                moveDir = new Vector2(Mathf.Sign(x), 0);
-            else if (Mathf.Abs(y) > 0)
-                moveDir = new Vector2(0, Mathf.Sign(y));
-
-            if (moveDir != Vector2.zero)
+            if (touch.phase == TouchPhase.Began)
             {
-                Vector2 target = rb.position + moveDir;
-                StartCoroutine(MoveToGrid(target, moveDir));
+                startTouchPosition = touch.position; // Save start position
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                endTouchPosition = touch.position; // Save end position
+                HandleSwipe(); // Handle swipe
             }
         }
+
+         // Update animation state and effects
+        if (animator != null) animator.SetBool("IsMoving", isMoving);
+        SetActiveMainModule(isMoving);
     }
 
-    IEnumerator MoveToGrid(Vector2 target, Vector2 direction)
+    void HandleSwipe()
+    {
+        Vector2 swipeDirection = endTouchPosition - startTouchPosition;
+
+        // Ignore if swipe is too short
+        if (swipeDirection.magnitude < 30)
+            return;
+
+        // Determine swipe direction and move
+        if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y))
+            StartCoroutine(MoveToGrid(swipeDirection.x > 0 ? Vector2.right : Vector2.left)); // Horizontal swipe
+        else
+            StartCoroutine(MoveToGrid(swipeDirection.y > 0 ? Vector2.up : Vector2.down)); // Vertical swipe
+    }
+
+    IEnumerator MoveToGrid(Vector2 direction)
     {
         if (!Moveable(direction))
         {
@@ -54,6 +96,8 @@ public class PlayerGridMover : MonoBehaviour
         }
 
         isMoving = true;
+
+        Vector2 target = rb.position + direction;
 
         // Di chuyển tới ô kế tiếp
         // safety guard: prevent infinite loop if movement is blocked mid-way
@@ -82,24 +126,9 @@ public class PlayerGridMover : MonoBehaviour
             yield return null;
         }
 
-        transform.position = new Vector2(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));;
+        transform.position = new Vector2(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
 
-        // Chờ delay giữa các bước nếu người chơi vẫn giữ phím
-        yield return new WaitForSeconds(moveDelay);
-
-        // Nếu vẫn giữ cùng hướng → di tiếp ô kế tiếp
-        if (IsHoldingDirection(direction))
-        {
-            Vector2 nextTarget = rb.position + direction;
-            isMoving = false;
-
-            StopAllCoroutines();
-            StartCoroutine(MoveToGrid(nextTarget, direction));
-        }
-        else
-        {
-            isMoving = false;
-        }
+        GameManager.Instance.LevelManager.MinusMoveCount();
 
         isMoving = false;
     }
@@ -111,28 +140,36 @@ public class PlayerGridMover : MonoBehaviour
 
         if (hit.collider == null) return true;
         
-            // Nếu gặp hộp → thử đẩy
-        // if (((1 << hit.collider.gameObject.layer) & boxLayer) != 0)
-        // {
-        //     // Kiểm tra ô sau hộp có trống không
-        //     RaycastHit2D boxHit = Physics2D.Raycast(hit.collider.gameObject.transform.position, dir, rayDistance, obstacleLayer | boxLayer);
-        //     if (boxHit.collider != null) return false; // bị chặn
-
-        //     return true;
-
-        // }
-            // Nếu là tường hoặc bị chặn → không di chuyển
-        else return false;
-        
-        
+        else return false;   
     }
 
-    private bool IsHoldingDirection(Vector2 dir)
+    private void SetActiveMainModule(bool active)
     {
-        if (dir.x > 0) return Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-        if (dir.x < 0) return Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-        if (dir.y > 0) return Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        if (dir.y < 0) return Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-        return false;
+        if (Module == null) return;
+        
+        foreach (ParticleSystem module in Module)
+        {
+            if (module == null) continue;
+            
+            var main = module.main;
+            Color color = main.startColor.color;
+            color.a = active ? 1f : 0f;
+            main.startColor = color;
+        }
+    }
+
+    public void ChangeDirection(Vector2 newDirection, Vector2 position)
+    {
+        StopAllCoroutines();
+        transform.position = position;
+        transform.position = position + newDirection;
+        isMoving = false;
+    }
+
+    public void ResetLevel()
+    {
+        StopAllCoroutines();
+        transform.position = originalPosition;
+        isMoving = false;
     }
 }

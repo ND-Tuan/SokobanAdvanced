@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Box
+  - StandardBox
+  - ElectricBox
+  - FireBox
+  - MagneticBox
+  - Undefined
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - UI
   - Wall
   - Box
-  - 
+  - Player
   - 
   - 
   - 

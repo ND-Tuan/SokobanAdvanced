@@ -1,21 +1,28 @@
+using System.Collections;
 using UnityEngine;
 
-public class Box : MonoBehaviour
+public class Box : MonoBehaviour, IMoveable, IResetLevel
 {
-	[SerializeField] private float gridSize = 1f;
-	[SerializeField] private float gridOffset = 0f;
-	[SerializeField] private Rigidbody2D rb;
-	[SerializeField] private float velocitySnapThreshold = 0.01f;
+	[SerializeField] protected float gridSize = 1f;
+	[SerializeField] protected float gridOffset = 0f;
+	[SerializeField] protected Rigidbody2D rb;
+	[SerializeField] protected float velocitySnapThreshold = 0.01f;
+	private Vector2 originalPosition;
 
 	private bool isSnapped = false;
 
 	void Start()
 	{
-		if (rb == null) rb = GetComponent<Rigidbody2D>();
 		isSnapped = true;
+		originalPosition = transform.position;
 	}
 
-	void FixedUpdate()
+	protected virtual void FixedUpdate()
+	{
+		SnapHandler();
+	}
+
+	protected virtual void SnapHandler()
 	{
 		// Auto-snap logic when box comes to rest
 		// using Rigidbody2D velocity to detect stop
@@ -42,16 +49,38 @@ public class Box : MonoBehaviour
 		return new Vector2(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
 	}
 
-    private void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("Box OnCollisionEnter2D with " + other.gameObject.name);
-        if(other.gameObject.CompareTag("Box"))
-        {
-            rb.mass = 10000f;
-        } else
+        if(other.gameObject.CompareTag("Player"))
         {
             rb.mass = 0.1f;
+        } else
+        {
+            rb.mass = 10000;
         }
 
     }
+
+	public void ChangeDirection(Vector2 newDirection, Vector2 position)
+    {
+        StopAllCoroutines();
+		DoAnythingElse();
+        transform.position = position;
+        transform.position = position + newDirection;
+		
+        
+    }
+
+	protected virtual void DoAnythingElse()
+	{
+		// For override
+
+	}
+
+	public void ResetLevel()
+	{
+		transform.position = originalPosition;
+		DoAnythingElse();
+	}
 }

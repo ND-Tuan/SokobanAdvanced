@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI Audio
+  m_EditorClassIdentifier: 
+  m_GroupName: UI Audio
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f8b8eec91aa166d4294910740a2e29f6
+  m_SerializeEntries:
+  - m_GUID: 2242c9d03eac49149ba7c2d92022c5b4
+    m_Address: Assets/Audio/FXSoundData/PlayerCollision.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 515d57f55e1cbbd4b9e2190932701810
+    m_Address: Assets/Audio/FXSoundData/ButtonSelect.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 06ca8710bf707794f915dea4a0d9f42f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7d4a1448537439243b941c599fc6ba68, type: 2}
+    - {fileID: 11400000, guid: 44c68db65448e414499b0969107d7e17, type: 2}

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: TaskData
+  m_EditorClassIdentifier: 
+  m_GroupName: TaskData
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 11050ab896765b4439c5ecd0094895d1
+  m_SerializeEntries:
+  - m_GUID: 4a5ada19c10ddd145864edbca8df2a92
+    m_Address: Assets/DataPack/TaskData/UseMultipleSpecialTiles.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5359746637f25ce4c841cfe95aeb5423
+    m_Address: Assets/DataPack/TaskData/UseKey.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59faed8139cffa1498128864b71cf47c
+    m_Address: Assets/DataPack/TaskData/UseNavigator.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80c59644ce26b7f4a993edc4c435e72e
+    m_Address: Assets/DataPack/TaskData/UseLever.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 820c80b83acdecf49a48972cefea5f31
+    m_Address: Assets/DataPack/TaskData/NoSpecial.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 886e648dbf2f98741bdd2ec04e5e6948
+    m_Address: Assets/DataPack/TaskData/UseObstacleMaker.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1d9304b80864114f945ee518e72e966
+    m_Address: Assets/DataPack/TaskData/UseTeleporter.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c015b015fd3ab5e4c91a0e9155ac3d0a
+    m_Address: Assets/DataPack/TaskData/BuyEnergy.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5a52d9f1d4b91f43a809a2c2fcd3dbb
+    m_Address: Assets/DataPack/TaskData/SpendEnergy.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb2b124db8a74684382e09548043b0a8
+    m_Address: Assets/DataPack/TaskData/UseFragileObstacle.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7a4c1092a5dc5a42a9b77a0331d6172
+    m_Address: Assets/DataPack/TaskData/Login.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dee0b61a130a3274aab274bc7459a957
+    m_Address: Assets/DataPack/TaskData/CompleteLevels.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eaf0105ec211cd74c9fe77d72ef5d694
+    m_Address: Assets/DataPack/TaskData/CompleteWith3Stars.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 06ca8710bf707794f915dea4a0d9f42f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7ab88746eb5600140ad2b1a230a6766a, type: 2}
+    - {fileID: 11400000, guid: 377822f5b897f924486252a6e1346b08, type: 2}

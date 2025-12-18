@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d3390916bb46f4e91ca4328f4c0f58, type: 3}
+  m_Name: Chicken
+  m_EditorClassIdentifier: 
+  skinID: 1
+  skinName: Chicken
+  skinImage: {fileID: 21300000, guid: 3202431200ac5044e8c735281b2eb1c0, type: 3}
+  price: 400
+  skinPrefab: {fileID: 2551974959869579252, guid: ba0112a7c7f50024bbf1403e81e59e87, type: 3}
