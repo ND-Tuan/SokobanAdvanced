@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
   m_Name: BuyEnergy
   m_EditorClassIdentifier: 
-  taskType: 9
+  taskType: 10
   targetAmount: 1
   description: Use coins to buy energy
   pt: 30

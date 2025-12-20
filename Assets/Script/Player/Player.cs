@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IResetLevel, IMoveable
         Interface.transform.localScale = Vector3.one;
 
         particle = Interface.GetComponentInChildren<ParticleSystem>();
+        originalPosition = transform.localPosition;
     }
 
     void Start()
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour, IResetLevel, IMoveable
         p.x = Mathf.RoundToInt(p.x) ;
         p.y = Mathf.RoundToInt(p.y);
         transform.position = p;
-        originalPosition = transform.position;
+        
     }
 
     void Update()
@@ -128,7 +129,7 @@ public class Player : MonoBehaviour, IResetLevel, IMoveable
 
         transform.position = new Vector2(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
 
-        GameManager.Instance.LevelManager.MinusMoveCount();
+        // GameManager.Instance.LevelManager.MinusMoveCount();
 
         isMoving = false;
     }
@@ -169,7 +170,14 @@ public class Player : MonoBehaviour, IResetLevel, IMoveable
     public void ResetLevel()
     {
         StopAllCoroutines();
-        transform.position = originalPosition;
+        Invoke(nameof(ResetPosition), 0.1f);
         isMoving = false;
+
+        Debug.Log("Player reset to original position: " + originalPosition);
+    }
+
+    private void ResetPosition()
+    {
+        transform.localPosition = originalPosition;
     }
 }

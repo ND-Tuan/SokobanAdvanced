@@ -9,6 +9,7 @@ namespace ObserverPattern{
     {
         static Dictionary<EvenID, List<Action<object[]>>> _Listener = new Dictionary<EvenID, List<Action<object[]>>>();
 
+        //Đăng ký sự kiện
         static public void AddListener(EvenID evenID, Action<object[]> callback)
         {
             if (!_Listener.ContainsKey(evenID))
@@ -18,6 +19,7 @@ namespace ObserverPattern{
             _Listener[evenID].Add(callback);
         }
 
+        //Hủy đăng ký sự kiện
         static public void RemoveListener(EvenID evenID, Action<object[]> callback)
         {
             if (_Listener.ContainsKey(evenID))
@@ -26,6 +28,7 @@ namespace ObserverPattern{
             }
         }
 
+        //Gửi sự kiện
         public static void PostEvent(EvenID evenID, params object[] data)
         {
             if (!_Listener.ContainsKey(evenID)) return;

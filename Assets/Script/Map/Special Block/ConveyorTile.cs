@@ -17,6 +17,7 @@ public class ConveyorTile : MonoBehaviour, IResetLevel, IPowerRequire
 
     private void Awake()
     {
+        //Đăng ký sự kiện thay đổi hướng
         Observer.AddListener(EvenID.ChangeDiraction, SetDiraction);
         originalDiraction = diraction;
         spriteRenderer.gameObject.SetActive(isPowered);
@@ -26,11 +27,12 @@ public class ConveyorTile : MonoBehaviour, IResetLevel, IPowerRequire
     //Đổi hướng người chơi
     void OnTriggerEnter2D(Collider2D other)
     {
-        Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.UseNavigator, 1, true });   
+        Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.UseConveyor, 1, true });   
         StartCoroutine(WaitAndChangeDirection(other));
         
     }
 
+    //Đợi đến khi người chơi vào đúng vị trí rồi đổi hướng
     IEnumerator WaitAndChangeDirection(Collider2D other)
     {
         yield return new WaitUntil(() => Vector2.Distance(other.transform.position, transform.position) < 0.01f);
@@ -53,6 +55,7 @@ public class ConveyorTile : MonoBehaviour, IResetLevel, IPowerRequire
                 break;
         }
 
+        // Kiểm tra va chạm với chướng ngại vật ở phía trước
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + otherDirection*0.55f, otherDirection, 0.9f, obstacleLayer);
 
         if (hit.collider != null ) yield break;
@@ -82,6 +85,7 @@ public class ConveyorTile : MonoBehaviour, IResetLevel, IPowerRequire
         }
     }
 
+    //Xử lý sự kiện thay đổi hướng
     private void SetDiraction(object[] data)
     {
         if ((int)data[0] == NavigatorID)
@@ -95,6 +99,7 @@ public class ConveyorTile : MonoBehaviour, IResetLevel, IPowerRequire
         }
     }
 
+    //Thiết lập trạng thái nguồn điện
     public void SetPowerState(bool state)
     {
         isPowered = state;

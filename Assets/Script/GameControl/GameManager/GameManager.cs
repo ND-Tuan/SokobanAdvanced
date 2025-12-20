@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private async void Start()
     {
+        //Khởi tạo PlayerData và LevelData
         await PlayerDataManager.InitializeAsync(CoinDefaultAmount, MaxEnergy);
         await DailyTaskManager.InitializeAsync();
         await PlayerDataManager.LoadSkinDataAsync();
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
         timer = remainder;
     }
 
+    //Hồi năng lượng theo thời gian
     public void RecoverEnergy()
     {
         //tính toán thời gian hồi năng lượng
@@ -148,6 +150,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Lấy thời gian để hồi lại 1 năng lượng
     public TimeSpan GetTimeToNextEnergy()
     {
         if (PlayerDataManager.PlayerData.Energy >= MaxEnergy)
@@ -156,6 +159,7 @@ public class GameManager : MonoBehaviour
         return TimeSpan.FromSeconds(EnergyRegenerationTime - timer);
     }
 
+    //Lấy thời gian để hồi đầy năng lượng
     public TimeSpan GetTimeToFullEnergy()
     {
         if (PlayerDataManager.PlayerData.Energy >= MaxEnergy)
@@ -166,6 +170,7 @@ public class GameManager : MonoBehaviour
         return TimeSpan.FromSeconds(totalSeconds);
     }
 
+    //Lưu thời gian hiện tại vào file định kỳ
     private async Task SaveTimeLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -175,7 +180,7 @@ public class GameManager : MonoBehaviour
             //Lưu lại thời gian hiện tại
             PlayerDataManager.SaveEnergyTimer(ntpTime, timer);
             Debug.Log("Đã lưu thời gian: " + ntpTime.ToString("yyyy-MM-dd HH:mm:ss"));
-
+            
             await Task.Delay(TimeSpan.FromSeconds(10), token);
         }
     }

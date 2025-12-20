@@ -15,12 +15,14 @@ public class Teleporter : MonoBehaviour, IPowerRequire
     [SerializeField] private BoxCollider2D boxCollider2D;
     [SerializeField] private GameObject EnergyRing;
     [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private FxAudioDataSO TeleportAudioData;
 
     void  Awake()
     {
         Observer.AddListener(EvenID.Teleport, TeleportObject);
     }
 
+    //Khi có vật thể đi vào teleporter
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!isTeleporting)
@@ -28,7 +30,10 @@ public class Teleporter : MonoBehaviour, IPowerRequire
             isTeleporting = true;
             Vector3 direction = transform.position - other.transform.position;
 
+            //Report task progress
             Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.UseTeleporter,  1, true});
+
+            //Bắt đầu dịch chuyển vật thể
             StartCoroutine(WaitAndTeleport(other, direction));
         }
     }
@@ -40,8 +45,15 @@ public class Teleporter : MonoBehaviour, IPowerRequire
         
     }
 
+    //Xử lý dịch chuyển vật thể
     private void TeleportObject(object[] data)
     {
+        if (!CheckTeleportable())
+        {
+            isTeleporting = false;
+            return;
+        } 
+
         isTeleporting = true;
         int teleporterID = (int)data[0];
         Collider2D other = (Collider2D)data[1];
@@ -50,6 +62,7 @@ public class Teleporter : MonoBehaviour, IPowerRequire
 
         direction = To4Direction(direction);
 
+        // Kiểm tra va chạm với chướng ngại vật ở phía trước
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + direction*0.5f, direction, 0.8f, obstacleLayer);
 
         if (hit.collider != null) direction = Vector2.zero;
@@ -76,15 +89,31 @@ public class Teleporter : MonoBehaviour, IPowerRequire
 
     IEnumerator ResetTeleportingState()
     {
-        yield return new WaitForSeconds(0.2f);
-        isTeleporting = false;
+        yield return new WaitForSeconds(0.1f);
+
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, 0.2f);
+        if (nearbyColliders.Length <= 1)
+            isTeleporting = false;
     }
 
+    private bool CheckTeleportable()
+    {
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, 0.2f);
+        
+        return nearbyColliders.Length <= 1;
+    }
+    
+
+    //Đợi đến khi người chơi vào đúng vị trí rồi dịch chuyển
     IEnumerator WaitAndTeleport(Collider2D other, Vector2 direction)
     {
         yield return new WaitUntil(() => Vector2.Distance(other.transform.position, transform.position) < 0.1f);
         
+        //Gửi sự kiện dịch chuyển
         Observer.PostEvent(EvenID.Teleport, new object[] {TeleporterID, other, this.gameObject, direction });
+
+        //Chạy âm thanh hiệu ứng dịch chuyển ở đây
+        Observer.PostEvent(EvenID.PlayFX, TeleportAudioData);
     }
 
     private void OnDestroy()
@@ -98,6 +127,7 @@ public class Teleporter : MonoBehaviour, IPowerRequire
        SetPowerState(isPowered);
     }
 
+    //Thay đổi màu hiệu ứng theo màu của teleporter
     private void ChangeParticleColor(Color color)
     {
         teleportParticles = GetComponentsInChildren<ParticleSystem>();

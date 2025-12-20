@@ -1,4 +1,5 @@
 using System.Collections;
+using ObserverPattern;
 using UnityEngine;
 
 public class OilBarrel : MonoBehaviour, IResetLevel
@@ -9,6 +10,7 @@ public class OilBarrel : MonoBehaviour, IResetLevel
     [SerializeField] private GameObject Mark;
     [SerializeField] private float ActiveDistance = 2f;
     [SerializeField] private BoxCollider2D boxCollider2D;
+    [SerializeField] private FxAudioDataSO ExplosionAudioData;
     public bool isExploded = false;
 
     void FixedUpdate()
@@ -25,36 +27,43 @@ public class OilBarrel : MonoBehaviour, IResetLevel
 
         foreach (Collider2D col in nearbyColliders)
         {
-            if (col.gameObject == gameObject) return;
+            if (col.gameObject == gameObject) continue;
             
-            if (!col.CompareTag("FireBox")) return;
+            if (!col.CompareTag("FireBox")) continue;
                 
             float distance = Vector2.Distance(transform.position, col.gameObject.transform.position);
             if (distance <= ActiveDistance && IsAdjacent(col.gameObject))
             {
                 // Kích hoạt thùng dầu
                 Explode(0);
+                Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.BlowUpOilBarrel, 1, true});
 
-                
+                // Chạy âm thanh hiệu ứng nổ
+                Observer.PostEvent(EvenID.PlayFX, ExplosionAudioData);
+
             }
         }
     }
 
     public void Explode( float delay )
     {
+        StopAllCoroutines();
         StartCoroutine(TriggerExplosion(delay));
     }
 
 
+    /// Kích hoạt vụ nổ sau một khoảng thời gian trì hoãn
     IEnumerator TriggerExplosion(float delay)
     {
         yield return new WaitForSeconds(delay);
 
+        // Bắt đầu hiệu ứng nổ
         isExploded = true;
         Barrel.SetActive(false);
         ExplosionEffect.Play("Explosion", 0, 0f);
         ExplosionEffect2.Play("Blink", 0, 0f);
 
+        // Kích hoạt các thùng dầu liền kề
         Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, ActiveDistance);
         foreach (Collider2D col in nearbyColliders)
         {
@@ -77,6 +86,7 @@ public class OilBarrel : MonoBehaviour, IResetLevel
     }
 
 
+    // Kiểm tra xem hai đối tượng có liền kề nhau không
     private bool IsAdjacent(GameObject other)
     {
         Vector2 diff = other.transform.position - transform.position;
@@ -96,5 +106,4 @@ public class OilBarrel : MonoBehaviour, IResetLevel
         boxCollider2D.enabled = true;
         isExploded = false;
     }
-
 }

@@ -167,6 +167,8 @@ MonoBehaviour:
   Mark: {fileID: 5304107317340333384}
   ActiveDistance: 1
   boxCollider2D: {fileID: 7325023660722046358}
+  ExplosionAudioData: {fileID: 11400000, guid: a647505cada6e934db38caae84c797cc, type: 2}
+  isExploded: 0
 --- !u!61 &7325023660722046358
 BoxCollider2D:
   m_ObjectHideFlags: 0

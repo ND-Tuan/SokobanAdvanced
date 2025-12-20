@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
-  m_Name: UseLever
+  m_Name: UseConveyor
   m_EditorClassIdentifier: 
-  taskType: 3
+  taskType: 1
   targetAmount: 1
-  description: Use Lever tile # time(s) to change direction of Navigator
+  description: Use Conveyor Belt # time(s)
   pt: 20

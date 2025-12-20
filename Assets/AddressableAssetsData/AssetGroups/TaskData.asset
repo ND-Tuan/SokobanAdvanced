@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: TaskData
   m_EditorClassIdentifier: 
   m_GroupName: TaskData
-  m_Data:
-    m_SerializedData: []
   m_GUID: 11050ab896765b4439c5ecd0094895d1
   m_SerializeEntries:
+  - m_GUID: 1fe105d758aefe84cbda613484c977da
+    m_Address: Assets/DataPack/TaskData/PowerSupply.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TaskData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a5ada19c10ddd145864edbca8df2a92
     m_Address: Assets/DataPack/TaskData/UseMultipleSpecialTiles.asset
     m_ReadOnly: 0
@@ -24,19 +28,19 @@ MonoBehaviour:
     - TaskData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5359746637f25ce4c841cfe95aeb5423
-    m_Address: Assets/DataPack/TaskData/UseKey.asset
+    m_Address: Assets/DataPack/TaskData/BowUpOilBarrel.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - TaskData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 59faed8139cffa1498128864b71cf47c
-    m_Address: Assets/DataPack/TaskData/UseNavigator.asset
+    m_Address: Assets/DataPack/TaskData/UseConveyor.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - TaskData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 80c59644ce26b7f4a993edc4c435e72e
-    m_Address: Assets/DataPack/TaskData/UseLever.asset
+    m_Address: Assets/DataPack/TaskData/ConveyorPressure.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - TaskData
@@ -48,7 +52,7 @@ MonoBehaviour:
     - TaskData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 886e648dbf2f98741bdd2ec04e5e6948
-    m_Address: Assets/DataPack/TaskData/UseObstacleMaker.asset
+    m_Address: Assets/DataPack/TaskData/DoorPressure.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - TaskData
@@ -72,7 +76,7 @@ MonoBehaviour:
     - TaskData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb2b124db8a74684382e09548043b0a8
-    m_Address: Assets/DataPack/TaskData/UseFragileObstacle.asset
+    m_Address: Assets/DataPack/TaskData/BlockDoor.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - TaskData

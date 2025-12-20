@@ -1,4 +1,5 @@
 using System.Collections;
+using ObserverPattern;
 using UnityEngine;
 
 public class Box : MonoBehaviour, IMoveable, IResetLevel
@@ -7,6 +8,7 @@ public class Box : MonoBehaviour, IMoveable, IResetLevel
 	[SerializeField] protected float gridOffset = 0f;
 	[SerializeField] protected Rigidbody2D rb;
 	[SerializeField] protected float velocitySnapThreshold = 0.01f;
+	[SerializeField] protected FxAudioDataSO MoveFailAudioData;
 	private Vector2 originalPosition;
 
 	private bool isSnapped = false;
@@ -24,8 +26,7 @@ public class Box : MonoBehaviour, IMoveable, IResetLevel
 
 	protected virtual void SnapHandler()
 	{
-		// Auto-snap logic when box comes to rest
-		// using Rigidbody2D velocity to detect stop
+		//tự động snap box khi vận tốc thấp
 		if (rb.linearVelocity.sqrMagnitude > velocitySnapThreshold * velocitySnapThreshold)
 		{
 			isSnapped = false;
@@ -40,7 +41,7 @@ public class Box : MonoBehaviour, IMoveable, IResetLevel
 		}
 	}
     
-
+	//Lấy vị trí đã khớp gần nhất
     private Vector2 GetSnappedPosition(Vector2 pos)
 	{
 		if (gridSize == 0f) return pos;
@@ -49,18 +50,43 @@ public class Box : MonoBehaviour, IMoveable, IResetLevel
 		return new Vector2(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
 	}
 
+	//Xử lý va chạm với vật thể khác
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("Box OnCollisionEnter2D with " + other.gameObject.name);
+
+		//Điều chỉnh khối lượng để tránh người chơi đẩy 2 box cùng lúc
         if(other.gameObject.CompareTag("Player"))
         {
             rb.mass = 0.1f;
+			StartCoroutine(CheckToMinusMoveCount(transform.position));
+
         } else
         {
             rb.mass = 10000;
         }
 
+		if (other.gameObject.CompareTag("MagneticBox") 
+			|| other.gameObject.CompareTag("FireBox") 
+			|| other.gameObject.CompareTag("ElectricBox") 
+			|| other.gameObject.CompareTag("StandardBox"))
+		{
+			Observer.PostEvent(EvenID.PlayFX, MoveFailAudioData);
+		}
+
     }
+
+
+	protected IEnumerator CheckToMinusMoveCount(Vector2 oldPosition)
+	{
+		yield return new WaitForSeconds(0.2f);
+
+		if (Vector2.Distance(oldPosition, transform.position) >= 0.3f)
+		{
+			GameManager.Instance.LevelManager.MinusMoveCount();
+		}
+	}
+	
 
 	public void ChangeDirection(Vector2 newDirection, Vector2 position)
     {

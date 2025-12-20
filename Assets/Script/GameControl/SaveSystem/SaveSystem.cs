@@ -88,12 +88,15 @@ public static class SaveSystem
 
     //=== INTERNAL METHODS ===//
 
+    //KeyContainer dùng để mã hóa và giải mã dữ liệu
     private static readonly KeyContainer keyContainer = new("YourUID");
 
+    //Lưu dữ liệu dạng JSON đã mã hóa vào file
     private static void SaveEncryptedJson<T>(string path, T data)
     {
         try
         {
+            //Chuyển đổi dữ liệu thành JSON và mã hóa nó
             string json = JsonUtility.ToJson(data);
             byte[] inputBytes = Encoding.UTF8.GetBytes(json);
             byte[] encryptedBytes = AESUtil.Encrypt(inputBytes, keyContainer);
@@ -105,6 +108,7 @@ public static class SaveSystem
         }
     }
 
+    //Tải dữ liệu dạng JSON đã mã hóa từ file
     private static T LoadEncryptedJson<T>(string path) where T : class
     {
         if (!File.Exists(path))

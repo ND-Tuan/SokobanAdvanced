@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
-  m_Name: UseKey
-  m_EditorClassIdentifier: 
-  taskType: 6
+  m_Name: PowerSupply
+  m_EditorClassIdentifier: Assembly-CSharp::TaskSO
+  taskType: 7
   targetAmount: 1
-  description: Collect key to unlock Lock Block # time(s)
+  description: Use Electric Box to power up connected devices.
   pt: 20

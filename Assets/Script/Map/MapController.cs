@@ -16,16 +16,18 @@ public class MapController : MonoBehaviour
 
     void Awake()
     {
-
+        //Lắng nghe sự kiện hoàn thành ô hoàn thành
         Observer.AddListener(EvenID.CompleteBox, WinCheck);
     }
 
     void Start()
     {
         SetUp();
+        //Lấy danh sách ô hoàn thành
         finishTiles = new List<FinishTile>(GetComponentsInChildren<FinishTile>());
     }
 
+    //Cài đặt bản đồ
     private void SetUp(){
         GameManager.Instance.LevelManager.SetUpMap(this, moveLimit, new int[] { MoveToGetStar1, MoveToGetStar2, MoveToGetStar3 });
 
@@ -35,6 +37,7 @@ public class MapController : MonoBehaviour
         }
     }
     
+    //Hiển thị hướng dẫn
     private IEnumerator DisplayGuide()
     {
         Time.timeScale = 0;
@@ -42,6 +45,7 @@ public class MapController : MonoBehaviour
         UIController.Instance.DisplayGuide(guideNeedToDisplayList);
     }
 
+    //Đặt lại bản đồ
     public void ResetMap()
     {
         SetUp();
@@ -52,8 +56,7 @@ public class MapController : MonoBehaviour
         }
     }
 
-   
-
+    //Kiểm tra điều kiện chiến thắng
     private void WinCheck(object[] data)
     {
         foreach(FinishTile finishTile in finishTiles)

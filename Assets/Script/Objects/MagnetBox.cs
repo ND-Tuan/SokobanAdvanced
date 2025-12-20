@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ObserverPattern;
 
 public class MagnetBox : Box
 {
     [SerializeField] private float magnetDistance = 1.1f; // Khoảng cách để dính với nhau
-    [SerializeField] private LayerMask magnetBoxLayer; // Layer để phát hiện MagnetBox khác
+    [SerializeField] private FxAudioDataSO StickAudioData;
     
     public List<MagnetBox> connectedBoxes = new List<MagnetBox>();
     private List<FixedJoint2D> joints = new List<FixedJoint2D>();
@@ -83,6 +84,8 @@ public class MagnetBox : Box
         joint.breakTorque = Mathf.Infinity;
         
         joints.Add(joint);
+
+        Observer.PostEvent(EvenID.PlayFX, StickAudioData);
     }
 
     protected override void DoAnythingElse()
@@ -166,10 +169,18 @@ public class MagnetBox : Box
         if(other.gameObject.CompareTag("Player"))
         {
             SyncMassToGroup(0.1f);
+            StartCoroutine(CheckToMinusMoveCount(transform.position));
         } else
         {
             SyncMassToGroup(10000f);
         }
+
+        if (other.gameObject.CompareTag("FireBox") 
+			|| other.gameObject.CompareTag("ElectricBox") 
+			|| other.gameObject.CompareTag("StandardBox"))
+		{
+			Observer.PostEvent(EvenID.PlayFX, MoveFailAudioData);
+		}
     }
 
     // Đồng bộ mass cho tất cả các box trong nhóm

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
   m_Name: UseMultipleSpecialTiles
   m_EditorClassIdentifier: 
-  taskType: 12
+  taskType: 13
   targetAmount: 3
   description: Use at least # special tiles in the same level
   pt: 40

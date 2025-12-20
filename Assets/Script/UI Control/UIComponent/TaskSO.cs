@@ -18,12 +18,13 @@ public class TaskSO : ScriptableObject
 
 public enum TaskType {
     Login,
-    UseNavigator,
+    UseConveyor,
     UseTeleporter,
-    ActivateLever,
-    UseObstacleMaker,
-    UseFragileObstacle,
-    CollectKey,
+    UseConveyorPressure,
+    UseDoorPressure,
+    BlockDoor,
+    BlowUpOilBarrel,
+    SupplyPower,
     CompleteWith3Stars,
     CompleteLevels,
     BuyEnergy,

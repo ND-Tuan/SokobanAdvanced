@@ -83,14 +83,18 @@ public class Door : MonoBehaviour, IResetLevel
                 door.CloseDoor();
             }
         }
+
+        if (IsBlocked())
+        {
+            Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.BlockDoor, 1, false});
+        }
             
     }
     
+    /// Xử lý sự kiện thay đổi trạng thái cửa
     private void OnChangeDoorState(object[] data)
     {
         isActived = (bool)data[0];
-
-        Debug.Log("Door received change state to: " + isActived);
 
         if (isActived)
             OpenDoor();
@@ -104,6 +108,8 @@ public class Door : MonoBehaviour, IResetLevel
     {
         // Xóa danh sách cũ
         adjacentDoors.Clear();     
+
+        // Tìm tất cả các cửa trong bán kính
         Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, adjacentSearchRadius);
         foreach (Collider2D col in nearbyColliders)
         {

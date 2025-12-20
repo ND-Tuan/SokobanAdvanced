@@ -9941,3 +9941,4 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 448
+  TeleportAudioData: {fileID: 11400000, guid: 6e1fb742a5ed0c24b807608bb5172179, type: 2}

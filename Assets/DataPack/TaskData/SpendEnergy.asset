@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
   m_Name: SpendEnergy
   m_EditorClassIdentifier: 
-  taskType: 10
+  taskType: 11
   targetAmount: 10
   description: Consume # energy
   pt: 40

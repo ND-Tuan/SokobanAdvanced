@@ -182,3 +182,4 @@ MonoBehaviour:
   gridOffset: 0
   rb: {fileID: 5020881648523330625}
   velocitySnapThreshold: 0.00001
+  MoveFailAudioData: {fileID: 11400000, guid: cab0706794ad3f847a40376b1f301570, type: 2}

@@ -36,6 +36,7 @@ public class CoinFly : MonoBehaviour
         transform.localScale = startScale;
     }
 
+    // Bắt đầu hiệu ứng scatter
     private void StartScatter()
     {
 
@@ -52,6 +53,7 @@ public class CoinFly : MonoBehaviour
         });
     }
 
+    // Bắt đầu hiệu ứng bay về mục tiêu
     private async void StartFlyToTarget()
     {
         if (target == null)

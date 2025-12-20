@@ -24,8 +24,10 @@ public class ConveyorPressure : MonoBehaviour, IPowerRequire
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        
-        Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.ActivateLever, 1, true});
+        //Báo cáo nhiệm vụ 
+        Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.UseConveyorPressure, 1, true});
+
+        //trì hoãn Gửi tín hiệu thay đổi hướng
         Invoke(nameof(ChangeDiraction), 0.1f);
             
     }
@@ -35,6 +37,7 @@ public class ConveyorPressure : MonoBehaviour, IPowerRequire
         Observer.PostEvent(EvenID.ChangeDiraction, new object[] {NavigatorID, null});
     }
 
+    //Gửi tín hiệu thay đổi hướng
     private void ChangeDiraction()
     {
         Observer.PostEvent(EvenID.ChangeDiraction, new object[] {NavigatorID, diraction});
@@ -45,6 +48,8 @@ public class ConveyorPressure : MonoBehaviour, IPowerRequire
         SetPowerState(originalPowerState);
     }
 
+
+    /// Thiết lập trạng thái nguồn
     public void SetPowerState(bool state)
     {
         isPowered = state;

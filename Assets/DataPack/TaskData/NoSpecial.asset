@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfbcbf8918241840a72e0172821398a, type: 3}
   m_Name: NoSpecial
   m_EditorClassIdentifier: 
-  taskType: 11
+  taskType: 12
   targetAmount: 1
   description: Complete a level without using any special tiles
   pt: 40

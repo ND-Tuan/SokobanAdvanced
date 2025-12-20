@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: UI Audio
   m_EditorClassIdentifier: 
   m_GroupName: UI Audio
-  m_Data:
-    m_SerializedData: []
   m_GUID: f8b8eec91aa166d4294910740a2e29f6
   m_SerializeEntries:
+  - m_GUID: 0787830153f0aa749997e8ed2d19eed0
+    m_Address: Assets/Audio/FXSoundData/MagnetStick.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2242c9d03eac49149ba7c2d92022c5b4
     m_Address: Assets/Audio/FXSoundData/PlayerCollision.asset
     m_ReadOnly: 0
@@ -24,6 +27,46 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 515d57f55e1cbbd4b9e2190932701810
     m_Address: Assets/Audio/FXSoundData/ButtonSelect.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 608d3094dd5e4e24d9e9de1f28e8f426
+    m_Address: Assets/Audio/FXSoundData/GUI Pop.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e1fb742a5ed0c24b807608bb5172179
+    m_Address: Assets/Audio/FXSoundData/TeleportFX.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7204cc81481f0334e9543db2cebc2000
+    m_Address: Assets/Audio/FXSoundData/PowerUp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95886d93a9cd308409febbbeb735f887
+    m_Address: Assets/Audio/FXSoundData/WinFx.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a647505cada6e934db38caae84c797cc
+    m_Address: Assets/Audio/FXSoundData/OilBarrelBlow.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd8b9c4d8c325d9449387ab2ae99f91e
+    m_Address: Assets/Audio/FXSoundData/StarPopUp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c567ffcadc16f1a4a89a9c7a7697f01a
+    m_Address: Assets/Audio/FXSoundData/PowerDown.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cab0706794ad3f847a40376b1f301570
+    m_Address: Assets/Audio/FXSoundData/PushBoxFail.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

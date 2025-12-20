@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7375981242312401385}
   m_Layer: 7
   m_Name: MagnetBox
-  m_TagString: Undefined
+  m_TagString: MagneticBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,8 +182,7 @@ MonoBehaviour:
   gridOffset: 0
   rb: {fileID: 5020881648523330625}
   velocitySnapThreshold: 0.00001
-  magnetDistance: 0.7
-  magnetBoxLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  MoveFailAudioData: {fileID: 11400000, guid: cab0706794ad3f847a40376b1f301570, type: 2}
+  magnetDistance: 1
+  StickAudioData: {fileID: 11400000, guid: 0787830153f0aa749997e8ed2d19eed0, type: 2}
   connectedBoxes: []

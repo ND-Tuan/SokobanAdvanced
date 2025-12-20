@@ -9,17 +9,22 @@ public class PowerDelivery : MonoBehaviour
     private List<IPowerRequire> powerReceivers = new() { };
     public GameObject LinePrefab ;
     [SerializeField] private List<LineRenderer> Wires = new() { };
+    [SerializeField] private FxAudioDataSO PowerOnAudioData;
+    [SerializeField] private FxAudioDataSO PowerOffAudioData;
 
 
     void Awake()
     {
+        // Tìm tất cả các thiết bị cần cấp nguồn
         foreach(GameObject gameObject in objectsToActivate)
         {
+            // Thêm vào danh sách thiết bị nhận nguồn
             if(gameObject.TryGetComponent<IPowerRequire>(out IPowerRequire receiver))
             {
                 powerReceivers.Add(receiver);
             }
 
+            // Tạo dây điện
             GameObject newLine = Instantiate(LinePrefab, this.transform);
             LineRenderer wire = newLine.GetComponent<LineRenderer>();
             Wires.Add(wire);
@@ -28,6 +33,7 @@ public class PowerDelivery : MonoBehaviour
 
     void Start()
     {
+        // Kết nối dây điện ban đầu
         for(int i = 0; i < objectsToActivate.Count; i++)
         {
             ConnectWire(objectsToActivate[i], Wires[i]);
@@ -38,10 +44,14 @@ public class PowerDelivery : MonoBehaviour
     {
         if (collision.CompareTag("ElectricBox"))
         {
-            foreach(var receiver in powerReceivers)
-            {
-                ChangePowerState(true);
-            }
+            //Báo cáo nhiệm vụ
+            Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.SupplyPower, 1, true});
+
+            // Cấp nguồn
+            ChangePowerState(true);
+
+            // Chạy âm thanh hiệu ứng cấp nguồn
+            Observer.PostEvent(EvenID.PlayFX, PowerOnAudioData);
         }
     }
 
@@ -49,13 +59,14 @@ public class PowerDelivery : MonoBehaviour
     {
         if (collision.CompareTag("ElectricBox"))
         {
-            foreach(var receiver in powerReceivers)
-            {
-                ChangePowerState(false);
-            }
+            ChangePowerState(false);
+
+            // Chạy âm thanh hiệu ứng ngắt nguồn
+            Observer.PostEvent(EvenID.PlayFX, PowerOffAudioData);
         }
     }
 
+    /// Thay đổi trạng thái nguồn điện cho các thiết bị nhận
     private void ChangePowerState(bool state)
     {
         foreach(var receiver in powerReceivers)
@@ -63,6 +74,8 @@ public class PowerDelivery : MonoBehaviour
             receiver.SetPowerState(state);
         }
 
+
+        // Cập nhật màu dây dẫn
         foreach(LineRenderer wire in Wires)
         {
             Color color = state? new Color(1,0.627451f,0, 1) : new Color(0.7568628f, 0.7882354f, 0.8039216f, 1);
@@ -83,6 +96,8 @@ public class PowerDelivery : MonoBehaviour
         }
     }
 
+
+    // Kết nối dây điện từ nguồn đến thiết bị nhận
     private void ConnectWire(GameObject receiver, LineRenderer line)
     {
         

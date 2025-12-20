@@ -107,6 +107,8 @@ MonoBehaviour:
   objectsToActivate: []
   LinePrefab: {fileID: 2845769944294323495, guid: 817db0a112dd09a44b2a4ef5db38de41, type: 3}
   Wires: []
+  PowerOnAudioData: {fileID: 11400000, guid: 7204cc81481f0334e9543db2cebc2000, type: 2}
+  PowerOffAudioData: {fileID: 11400000, guid: c567ffcadc16f1a4a89a9c7a7697f01a, type: 2}
 --- !u!61 &124595616914996066
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -249,6 +249,7 @@ public class UIController : MonoBehaviour
     public void OnClickBackToLevelSelect()
     {
         GameManager.Instance.LevelManager.UnloadLevel();
+        GameManager.Instance.PlayerDataManager.SpendEnergy(1);
         Close();
         LevelSelectPanel.Show();
         AmountBar.SetActive(true);
