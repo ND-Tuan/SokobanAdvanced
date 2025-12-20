@@ -18,27 +18,30 @@ public class DailyMissionPanel : BasePanelController
 
     private int currentPT;
 
+    // cập nhật giao diện nhiệm vụ hàng ngày
     public void MissionsUiUpdate()
     {
         int totalPT = 0;
 
+        // reset trạng thái thông báo
         Observer.PostEvent(EvenID.RedDdotMission, false);
 
         int i = 0;
+        // duyệt qua tất cả nhiệm vụ và cập nhật giao diện
         foreach (var task in GameManager.Instance.DailyTaskManager.DailyTasksProgress)
         {
             if (i >= MissionInfos.Length)
                 break;
-
+    
             if (!GameManager.Instance.DailyTaskManager.AllTasks.TryGetValue(task.Key, out TaskSO taskSO))
             {
                 Debug.LogError($"TaskSO not found for TaskType: {task.Key}");
                 continue;
             }
-
+            
             if (task.Value == -1)
             {
-                // Skip CompleteLevels task as it is not displayed
+                // nhiệm vụ đã hoàn thành và đã nhận thưởng
                 MissionInfos[i].gameObject.transform.SetAsLastSibling();
                 MissionInfos[i].SetClaimed();
                 totalPT += taskSO.PT;
@@ -47,6 +50,7 @@ public class DailyMissionPanel : BasePanelController
                 continue;
             }
 
+            // tính tổng điểm nhiệm vụ đã hoàn thành
             MissionInfos[i].SetMissionInfo(taskSO, task.Value);
 
             if(task.Value >= taskSO.TargetAmount)
@@ -63,10 +67,13 @@ public class DailyMissionPanel : BasePanelController
         UpdateRewardButtons();
     }
     
+    // cập nhật trạng thái nút nhận thưởng
     public void UpdateRewardButtons()
     {   
+        // reset trạng thái thông báo
         int DailyClaimed = GameManager.Instance.PlayerDataManager.PlayerData.DailyClaimed;
 
+        // duyệt qua các nút nhận thưởng và cập nhật trạng thái
         for (int i = 0; i < RewardBTN.Length; i++)
         {
             RewardBTN[i].SetActive(false);
@@ -74,6 +81,7 @@ public class DailyMissionPanel : BasePanelController
             ClaimableIcons[i].SetActive(false);
         }
 
+        // kiểm tra điều kiện để hiển thị nút nhận thưởng
         if (currentPT >= 20 && !DoneIcons[0].activeInHierarchy && DailyClaimed < 1)
         {
             RewardBTN[0].SetActive(true);
@@ -96,8 +104,10 @@ public class DailyMissionPanel : BasePanelController
         }
     }
 
+    // xử lý khi nhấn nút nhận thưởng
     public void OnClickClaimReward(int index)
     {
+        // cập nhật trạng thái đã nhận thưởng
         switch (index)
         {
             case 0:
@@ -119,8 +129,7 @@ public class DailyMissionPanel : BasePanelController
                 return;
         }
 
-
-
+        // cập nhật giao diện sau khi nhận thưởng
         UIController.Instance.ChangeCoinAmountEffect();
         UIController.Instance.ChangeEnergyAmountEffect();
 

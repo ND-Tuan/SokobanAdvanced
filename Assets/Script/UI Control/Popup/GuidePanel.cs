@@ -54,34 +54,34 @@ public class GuidePanel : BasePanelController
     {
         if(!guideSO.ContainsKey(guideType.GuideType)) return;
 
-        // Set the panel position
+        //điều chỉnh vị trí panel
         AdjustPanelPosition(guideType.transform);
 
-        // Set the display content
-        // If there are more guides, show the next button
+        //Đổi text nút
+        //nếu còn nhiều hướng dẫn thì hiện nút NEXT, nếu chỉ còn hướng dẫn cuối thì hiện nút CLOSE
         ButtonText.text = guideNeedToDisplayList.Count > 1 ? "NEXT" : "CLOSE";
 
-        // Set name and description
+        //Đổi tên và mô tả hướng dẫn
         GuideNameText.text = guideSO[guideType.GuideType].GuideName;
         GuideDescriptionText.text = guideSO[guideType.GuideType].GuideDescription;
 
-        // Remove the guide that has been displayed
+        // Loại bỏ hướng dẫn đã được hiển thị
         guideNeedToDisplayList.Remove(guideType);
 
         Popup(AnimationTimeIn);
 
-        // Show focus highlight
+        // Hiển thị vùng highlight
         GuideFocus.transform.position = guideType.transform.position + guideType.OffsetPos;
         GuideFocus.gameObject.SetActive(true);
         DisplayFocus();
     }
 
-    // Adjust the position of the panel
+    // Điều chỉnh vị trí của bảng hướng dẫn dựa trên vị trí của đối tượng được truyền vào
     private void AdjustPanelPosition(Transform transform)
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
 
-        // Calculate the new position of the panel based on the object's position
+        // Tính toán vị trí mới của bảng dựa trên vị trí của đối tượng
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             this.transform.parent.GetComponent<RectTransform>(),
             Camera.main.WorldToScreenPoint(transform.position),
@@ -89,7 +89,7 @@ public class GuidePanel : BasePanelController
             out Vector2 localPoint
         );
 
-        // Change the pivot and panel direction based on the object's position
+        // Thay đổi điểm neo và hướng của bảng dựa trên vị trí của đối tượng
         if(localPoint.x >0) {
             rectTransform.pivot = new Vector2(1.1f, 1.15f);
             Hand.transform.localScale = new Vector3(-1, 1, 1);
@@ -101,11 +101,11 @@ public class GuidePanel : BasePanelController
             Hand.GetComponent<RectTransform>().anchoredPosition = new Vector3(-300, 200, 0);
         }
 
-        // Change the position of the panel
+        // Thay đổi vị trí của bảng
         rectTransform.anchoredPosition = localPoint;
     }
 
-    // Handle the logic for the next button
+    // Xử lý logic cho nút tiếp theo
     public void NextGuide()
     {
         Debug.Log("Next Guide Clicked: " + guideNeedToDisplayList.Count + " remaining.");
@@ -120,7 +120,7 @@ public class GuidePanel : BasePanelController
         }
     }
 
-    // Handle displaying the highlight panel
+    // Hiển thị hiệu ứng vùng highlight
     private void DisplayFocus(){
 
         GuideFocus.alpha = 0;
@@ -131,6 +131,7 @@ public class GuidePanel : BasePanelController
         seq.Join(GuideFocus.transform.DOScale(1, AnimationTimeIn*1.25f).SetEase(Ease.OutBack));
     }
 
+    // Ẩn hiệu ứng vùng highlight
     public void HideFocus()
     {
         Sequence seq = DOTween.Sequence();

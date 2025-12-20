@@ -81,26 +81,32 @@ public class PlayerDataManager
     //====Xử lý dữ liệu skin=========================
 
     public void BuySkin(int skinID)
-    {
+    {   
+        // nếu đã sở hữu skin thì không làm gì cả
         if (CheckSkinOwned(skinID)) return;
 
+        // nếu không đủ xu thì không làm gì cả
         if (CheckCoinEnough(skinDataDictionary[skinID].Price))
         {
+            // trừ xu và thêm skin vào danh sách sở hữu
             SpendCoin(skinDataDictionary[skinID].Price);
             playerData.SkinOwned.Add(skinID);
             SaveSystem.SavePlayerData(playerData);
         }
     }
 
+    // trang bị skin
     public void EquipSkin(int skinID)
     {
         if (CheckSkinOwned(skinID))
         {
+            // trang bị skin và lưu dữ liệu
             playerData.SkinEquipped = skinID;
             SaveSystem.SavePlayerData(playerData);
         }
     }
 
+    // lấy skin đang được trang bị
     public SkinSO GetEquippedSkin()
     {
         if (skinDataDictionary.TryGetValue(playerData.SkinEquipped, out var skin))
@@ -110,6 +116,7 @@ public class PlayerDataManager
         return null;
     }
 
+    // kiểm tra skin đã sở hữu chưa
     public bool CheckSkinOwned(int skinID)
     {
         return playerData.SkinOwned.Contains(skinID);
@@ -182,6 +189,7 @@ public class PlayerDataManager
         }
     }
     
+    //====Xử lý dữ liệu skin từ Addressables=========================
     public async Task LoadSkinDataAsync()
     {
         var handle = Addressables.LoadAssetsAsync<SkinSO>("SkinData", null);

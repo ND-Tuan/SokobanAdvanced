@@ -17,12 +17,15 @@ public class EnergyPanel : BasePanelController
 
     private int buyAmount;
     private int cost;
-
+    
+    // Update is called once per frame
     void Update()
     {
+        // cập nhật thời gian hồi năng lượng
         NextEnergyTime = GameManager.Instance.GetTimeToNextEnergy();
         FullEnergyTime = GameManager.Instance.GetTimeToFullEnergy();
 
+        // hiển thị thời gian lên UI
         if (FullEnergyTime.TotalSeconds > 0)
         {
             CoolDownText.text = "Recover in: " + NextEnergyTime.ToString(@"mm\:ss")
@@ -55,7 +58,7 @@ public class EnergyPanel : BasePanelController
 
     public void AdjustBuyAmount(int amount)
     {
-
+        // điều chỉnh số lượng năng lượng muốn mua
         if (buyAmount + amount < 1) return;
 
         buyAmount += amount;
@@ -68,6 +71,7 @@ public class EnergyPanel : BasePanelController
         CostText.color = color;
     }
 
+    //mua năng lượng
     public void BuyEnergy()
     {
         if (cost > GameManager.Instance.PlayerDataManager.PlayerData.Coin)
@@ -76,12 +80,14 @@ public class EnergyPanel : BasePanelController
             return;
         }
 
+        //trừ xu và cộng năng lượng
         GameManager.Instance.PlayerDataManager.SpendCoin(cost);
         GameManager.Instance.PlayerDataManager.AddEnergy(buyAmount);
 
         UIController.Instance.ChangeCoinAmountEffect();
         UIController.Instance.ChangeEnergyAmountEffect();
 
+        //báo cáo tiến độ nhiệm vụ mua năng lượng
         Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.BuyEnergy, 1, false});
     }
 }

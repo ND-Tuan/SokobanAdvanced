@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
         saveLoopCTS = new CancellationTokenSource();
         UIController.Instance.ShowAmountBar();
         await SaveTimeLoopAsync(saveLoopCTS.Token);
-
-       
     }
+
+    
 
     void Update()
     {

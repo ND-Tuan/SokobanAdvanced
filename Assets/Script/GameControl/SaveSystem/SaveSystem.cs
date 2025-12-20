@@ -64,26 +64,47 @@ public static class SaveSystem
     private static readonly string playerDataPath = Path.Combine(Application.persistentDataPath, "playerdata.json");
     private static readonly string levelDataPath = Path.Combine(Application.persistentDataPath, "leveldata.json");
 
+    // PlayerPrefs keys for WebGL
+    private const string PLAYERPREFS_PLAYERDATA_KEY = "PlayerData_Encrypted";
+    private const string PLAYERPREFS_LEVELDATA_KEY = "LevelData_Encrypted";
+
     //=== PUBLIC API ===//
 
     public static void SavePlayerData(PlayerData data)
     {
+#if UNITY_WEBGL
+        SaveToPlayerPrefs(PLAYERPREFS_PLAYERDATA_KEY, data);
+#else
         SaveEncryptedJson(playerDataPath, data);
+#endif
     }
 
     public static async Task<PlayerData> LoadPlayerData()
     {
+#if UNITY_WEBGL
+        // PlayerPrefs must be called from main thread on WebGL
+        return await Task.FromResult(LoadFromPlayerPrefs<PlayerData>(PLAYERPREFS_PLAYERDATA_KEY));
+#else
         return await Task.Run(() => LoadEncryptedJson<PlayerData>(playerDataPath));
+#endif
     }
 
     public static void SaveLevelData(LevelData data)
     {
+#if UNITY_WEBGL
+        SaveToPlayerPrefs(PLAYERPREFS_LEVELDATA_KEY, data);
+#else
         SaveEncryptedJson(levelDataPath, data);
+#endif
     }
 
     public static LevelData LoadLevelData()
     {
+#if UNITY_WEBGL
+        return LoadFromPlayerPrefs<LevelData>(PLAYERPREFS_LEVELDATA_KEY);
+#else
         return LoadEncryptedJson<LevelData>(levelDataPath);
+#endif
     }
 
     //=== INTERNAL METHODS ===//
@@ -127,6 +148,50 @@ public static class SaveSystem
         catch (Exception ex)
         {
             Debug.LogError($"Failed to load encrypted data from {path}: {ex.Message}");
+            return null;
+        }
+    }
+
+    //=== PLAYERPREFS METHODS FOR WEBGL ===//
+
+    //Lưu dữ liệu vào PlayerPrefs (dùng cho WebGL)
+    private static void SaveToPlayerPrefs<T>(string key, T data)
+    {
+        try
+        {
+            string json = JsonUtility.ToJson(data);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(json);
+            byte[] encryptedBytes = AESUtil.Encrypt(inputBytes, keyContainer);
+            string base64 = Convert.ToBase64String(encryptedBytes);
+            PlayerPrefs.SetString(key, base64);
+            PlayerPrefs.Save();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Failed to save data to PlayerPrefs with key {key}: {ex.Message}");
+        }
+    }
+
+    //Tải dữ liệu từ PlayerPrefs (dùng cho WebGL)
+    private static T LoadFromPlayerPrefs<T>(string key) where T : class
+    {
+        if (!PlayerPrefs.HasKey(key))
+        {
+            Debug.LogWarning($"PlayerPrefs key not found: {key}");
+            return null;
+        }
+
+        try
+        {
+            string base64 = PlayerPrefs.GetString(key);
+            byte[] encryptedBytes = Convert.FromBase64String(base64);
+            byte[] decryptedBytes = AESUtil.Decrypt(encryptedBytes, keyContainer);
+            string json = Encoding.UTF8.GetString(decryptedBytes);
+            return JsonUtility.FromJson<T>(json);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Failed to load data from PlayerPrefs with key {key}: {ex.Message}");
             return null;
         }
     }
