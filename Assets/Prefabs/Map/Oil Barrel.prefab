@@ -168,6 +168,9 @@ MonoBehaviour:
   ActiveDistance: 1
   boxCollider2D: {fileID: 7325023660722046358}
   ExplosionAudioData: {fileID: 11400000, guid: a647505cada6e934db38caae84c797cc, type: 2}
+  BoxLayer:
+    serializedVersion: 2
+    m_Bits: 128
   isExploded: 0
 --- !u!61 &7325023660722046358
 BoxCollider2D:

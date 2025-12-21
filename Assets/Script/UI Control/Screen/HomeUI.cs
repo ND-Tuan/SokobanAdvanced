@@ -25,13 +25,14 @@ public class HomeUI : BasePanelController
 
     async void Start()
     {
-        Observer.PostEvent(EvenID.ChangeMusic, HomeMainTheme);
-
         await WaitForSkinDataReady();
 
         UpdateSkin();
         Observer.AddListener(EvenID.RedDdotMission, OnDisplayRedDot);
+        
+        Observer.PostEvent(EvenID.ChangeMusic, HomeMainTheme);
     }
+   
 
     private void UpdateSkin()
     {

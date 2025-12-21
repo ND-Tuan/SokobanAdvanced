@@ -170,6 +170,7 @@ public class MagnetBox : Box
         {
             SyncMassToGroup(0.1f);
             StartCoroutine(CheckToMinusMoveCount(transform.position));
+            Observer.PostEvent(EvenID.PlayFX, MoveAudioData);
         } else
         {
             SyncMassToGroup(10000f);

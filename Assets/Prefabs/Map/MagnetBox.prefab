@@ -183,6 +183,7 @@ MonoBehaviour:
   rb: {fileID: 5020881648523330625}
   velocitySnapThreshold: 0.00001
   MoveFailAudioData: {fileID: 11400000, guid: cab0706794ad3f847a40376b1f301570, type: 2}
+  MoveAudioData: {fileID: 11400000, guid: 056bc3c9b93292949bcbd81b2e267a51, type: 2}
   magnetDistance: 1
   StickAudioData: {fileID: 11400000, guid: 0787830153f0aa749997e8ed2d19eed0, type: 2}
   connectedBoxes: []

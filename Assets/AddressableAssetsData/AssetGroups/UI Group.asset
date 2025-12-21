@@ -13,18 +13,16 @@ MonoBehaviour:
   m_Name: UI Group
   m_EditorClassIdentifier: 
   m_GroupName: UI Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: 7a1841a98b04c2b43a63693c19e840f7
   m_SerializeEntries:
   - m_GUID: 061e566b6d65d7548a38a9966273e174
-    m_Address: Assets/Prefabs/UI/Stage/Stage 2.prefab
+    m_Address: Assets/Prefabs/UI/Stage/Stage 1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - StageUI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4b9f0e9708bc2049ad8511cea944e12
-    m_Address: Assets/Prefabs/UI/Stage/Stage 1.prefab
+    m_Address: Assets/Prefabs/UI/Stage/Stage 2.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - StageUI

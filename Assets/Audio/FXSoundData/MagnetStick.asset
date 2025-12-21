@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MagnetStick
   m_EditorClassIdentifier: Assembly-CSharp::FxAudioDataSO
   versionsList:
-  - {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+  - {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
   minPitch: 0.9
   maxPitch: 1.1

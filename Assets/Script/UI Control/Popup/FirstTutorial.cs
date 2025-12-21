@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FirstTutorial : MonoBehaviour
 {
-    [SerializeField] private List<GuideDisplayInfo> guideNeedToDisplayList = new();
     [SerializeField] private GameObject firstTutorialPanel;
     [SerializeField] private Player player;
+    private Vector3 playerStartPos;
     void Start()
     {
         StartCoroutine(DisplayGuide());
+        playerStartPos = player.transform.position;
     }
 
     private IEnumerator DisplayGuide()
@@ -17,7 +18,7 @@ public class FirstTutorial : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         firstTutorialPanel.SetActive(true);
 
-        yield return new WaitUntil(() => !player.isMoving && player.transform.position != new Vector3(-3, -3, 0));
+        yield return new WaitUntil(() => !player.isMoving && player.transform.position != playerStartPos);
         
         firstTutorialPanel.SetActive(false);
     }

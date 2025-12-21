@@ -17,6 +17,7 @@ public class FinishTile : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer IconSpriteRenderer;
     public bool isCompleted = false;
+    [SerializeField] private FxAudioDataSO CompleteTileAudioData;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -42,6 +43,9 @@ public class FinishTile : MonoBehaviour
             Observer.PostEvent(EvenID.CompleteBox, null);
             IconSpriteRenderer.sprite = iconSprites[4];
             IconSpriteRenderer.gameObject.SetActive(true);
+            
+            // Play complete sound
+            Observer.PostEvent(EvenID.PlayFX, CompleteTileAudioData);
             return;
         }
 

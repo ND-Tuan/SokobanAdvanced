@@ -11,24 +11,28 @@ public class OilBarrel : MonoBehaviour, IResetLevel
     [SerializeField] private float ActiveDistance = 2f;
     [SerializeField] private BoxCollider2D boxCollider2D;
     [SerializeField] private FxAudioDataSO ExplosionAudioData;
+    [SerializeField] private LayerMask BoxLayer; // Thêm layer mask để tối ưu
     public bool isExploded = false;
+    private float checkInterval = 0.1f; // Giảm tần suất kiểm tra
+    private float nextCheckTime = 0f;
 
     void FixedUpdate()
     {
-        CheckFire();
+        if (Time.time >= nextCheckTime)
+        {
+            CheckFire();
+            nextCheckTime = Time.time + checkInterval;
+        }
     }
 
-    private void CheckFire()
-    
+    private void CheckFire() 
     {
         if(isExploded) return;
         // Tìm tất cả MagnetBox gần đây
-        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, ActiveDistance);
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, ActiveDistance, BoxLayer);
 
         foreach (Collider2D col in nearbyColliders)
-        {
-            if (col.gameObject == gameObject) continue;
-            
+        {   
             if (!col.CompareTag("FireBox")) continue;
                 
             float distance = Vector2.Distance(transform.position, col.gameObject.transform.position);
@@ -37,10 +41,6 @@ public class OilBarrel : MonoBehaviour, IResetLevel
                 // Kích hoạt thùng dầu
                 Explode(0);
                 Observer.PostEvent(EvenID.ReportTaskProgress, new object[] { TaskType.BlowUpOilBarrel, 1, true});
-
-                // Chạy âm thanh hiệu ứng nổ
-                Observer.PostEvent(EvenID.PlayFX, ExplosionAudioData);
-
             }
         }
     }
@@ -80,7 +80,10 @@ public class OilBarrel : MonoBehaviour, IResetLevel
             }
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.2f);
+        Observer.PostEvent(EvenID.PlayFX, ExplosionAudioData);
+
+        yield return new WaitForSeconds(0.5f);
         boxCollider2D.enabled = false;
         Mark.SetActive(true);
     }

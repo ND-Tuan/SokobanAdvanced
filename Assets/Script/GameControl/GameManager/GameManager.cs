@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public DailyTaskManager DailyTaskManager;
 
     //====Singleton================
-    private void Awake()
+    private async void Awake()
     {
         if (Instance == null)
         {
@@ -44,10 +44,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-    }
-
-    private async void Start()
-    {
         //Khởi tạo PlayerData và LevelData
         await PlayerDataManager.InitializeAsync(CoinDefaultAmount, MaxEnergy);
         await DailyTaskManager.InitializeAsync();

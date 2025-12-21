@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ObserverPattern;
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class AudioManager : MonoBehaviour
 {
@@ -55,10 +56,16 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        //Khởi tạo âm thanh
+        StartCoroutine(InitiationVolumes());
+    }
+
+    IEnumerator InitiationVolumes()
+    {
+        yield return new WaitForSecondsRealtime(0.1f); // Chờ một chút để đảm bảo dữ liệu đã sẵn sàng
         float musicVolume = GameManager.Instance.PlayerDataManager.PlayerData.MusicVolume;
 
-        currentMusicSource.volume = musicVolume;
+        Debug.Log("Initial Music Volume: " + musicVolume);
+
         currentMusicSource.Play();
         nextMusicSource.volume = 0;
     }

@@ -211,6 +211,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3228263219611331290}
   IconSpriteRenderer: {fileID: 3951317243319539558}
   isCompleted: 0
+  CompleteTileAudioData: {fileID: 11400000, guid: d0ca261afe88cc5429f30a3fa2488b62, type: 2}
 --- !u!61 &3279627426914373140
 BoxCollider2D:
   m_ObjectHideFlags: 0

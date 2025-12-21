@@ -46,6 +46,12 @@ public class LevelSelectUI : BasePanelController
         
         ScrollView.content = StageDic[currentStageIndex].GetComponent<RectTransform>();
         UIController.Instance.SetBackgroundImage(StageDic[currentStageIndex].BGColor);
+
+         for (int i = 0; i < Components.Length; i++)
+        {
+            Components[i].DOColor(StageDic[currentStageIndex].MainColor, AnimationTimeIn).SetUpdate(true);
+            
+        }
     }
 
 

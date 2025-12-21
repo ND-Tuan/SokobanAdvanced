@@ -16,7 +16,7 @@ public class LevelCompletePanel : BasePanelController
     [SerializeField] private GameObject Reward;
     [SerializeField] private RectTransform CoinBar;
     [SerializeField] private GameObject RewardCoin;
-    [SerializeField] private GameObject X2RewardButton;
+
 
     [Header("Settings")]
     [SerializeField] private float starPopupDelay = 0.5f;       // Delay between each star
@@ -60,7 +60,6 @@ public class LevelCompletePanel : BasePanelController
 
     private void ShowRewardAnimated(int rewardAmount){
         Reward.SetActive(!(rewardAmount == 0));
-        X2RewardButton.SetActive(!(rewardAmount == 0));
 
         if (rewardAmount == 0) return;
 
